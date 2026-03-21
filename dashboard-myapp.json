@@ -1,0 +1,5 @@
+{
+  "title": "myapp — Application Dashboard",
+  "tags": ["myapp", "custom"],
+  "description": "Custom Grafana dashboard for myapp — CPU, memory, restarts, pod count, logs"
+}

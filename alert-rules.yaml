@@ -1,0 +1,37 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: myapp-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: myapp.rules
+      rules:
+        - alert: MyAppPodRestarting
+          expr: sum(kube_pod_container_status_restarts_total{namespace="myapp"}) > 0
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            summary: "myapp pod is restarting"
+            description: "A pod in the myapp namespace has restarted {{ $value }} times"
+
+        - alert: MyAppPodNotRunning
+          expr: count(kube_pod_status_phase{namespace="myapp", phase="Running"}) < 2
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "myapp has less than 2 running pods"
+            description: "Only {{ $value }} pods running in myapp namespace"
+
+        - alert: HighMemoryUsage
+          expr: sum(container_memory_working_set_bytes{namespace="myapp", container!=""}) > 100000000
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "myapp memory usage is high"
+            description: "myapp memory exceeds 100MB"
