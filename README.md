@@ -2,7 +2,7 @@
 
 > A production-grade Kubernetes observability stack deployed via Helm.
 > Full metrics, logs, dashboards, and alerting — installed in minutes,
-> monitoring everything from node CPU to individual pod restarts.
+> monitoring everything from node CPU to individual pod restarts .
 
 ---
 
