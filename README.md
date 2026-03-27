@@ -6,7 +6,7 @@
 
 ---
 
-## Live Stack!
+## Live Stack !
 
 ```
 kubectl get pods -n monitoring
